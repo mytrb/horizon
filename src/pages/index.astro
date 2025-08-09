@@ -17,7 +17,7 @@ const top = `rgb(${topVec[0]}, ${topVec[1]}, ${topVec[2]})`;
 const bottom = `rgb(${bottomVec[0]}, ${bottomVec[1]}, ${bottomVec[2]})`;
 ---
 
-<html lang="en">
+<html lang="en" style={{height: "100%", background: gradient}}>
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -31,16 +31,5 @@ const bottom = `rgb(${bottomVec[0]}, ${bottomVec[1]}, ${bottomVec[2]})`;
     />
     <title>Horizon at {`${latitude}, ${longitude}`}</title>
   </head>
-  <body> </body>
+  <body style={{backgroundColor: bottom}}> </body>
 </html>
-
-<style is:global define:vars={{ gradient, bottom }}>
-  html {
-    height: 100%;
-    background: var(--gradient);
-  }
-
-  body {
-    background-color: var(--bottom);
-  }
-</style>
