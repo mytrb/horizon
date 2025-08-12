@@ -4,8 +4,8 @@
  * Physical model and parameter choices derived from "A Scalable and Production
  * Ready Sky and Atmosphere Rendering Technique" (Sébastien Hillaire).
  *
- * Implementation derived from "Production Sky Rendering" (Andrew Helmer).
- * Source: https://www.shadertoy.com/view/slSXRW)
+ * Implementation derived from "Production Sky Rendering" (Andrew Helmer,
+ * MIT License). Source: https://www.shadertoy.com/view/slSXRW
  */
 
 import { clamp, dot, len, norm, add, scale, exp } from "./utils";
@@ -183,15 +183,15 @@ export default function renderGradient(altitude: number): [string, Vec3, Vec3] {
             rayOrigin[1] / rayOriginRadius,
             rayOrigin[2] / rayOriginRadius,
           ],
-          viewDirection
+          viewDirection,
         ),
         -1,
-        1
+        1,
       );
       const startRayAngle = Math.acos(Math.abs(startRayCos));
       const transmittanceCameraToSpace = computeTransmittance(
         startHeight,
-        startRayAngle
+        startRayAngle,
       );
 
       for (let j = 0; j < SAMPLES; j++) {
@@ -214,7 +214,7 @@ export default function renderGradient(altitude: number): [string, Vec3, Vec3] {
         // Transmittance camera→sample and sample→space
         const transmittanceToSpace = computeTransmittance(
           sampleHeight,
-          viewAngle
+          viewAngle,
         );
         const transmittanceCameraToSample = [0, 0, 0] as Vec3;
         for (let k = 0; k < 3; k++) {
@@ -228,7 +228,7 @@ export default function renderGradient(altitude: number): [string, Vec3, Vec3] {
 
         // Local densities and phase functions
         const opticalDensityRay = Math.exp(
-          -sampleHeight / RAYLEIGH_SCALE_HEIGHT
+          -sampleHeight / RAYLEIGH_SCALE_HEIGHT,
         );
         const opticalDensityMie = Math.exp(-sampleHeight / MIE_SCALE_HEIGHT);
         const sunViewCos = clamp(dot(sunDirection, viewDirection), -1, 1);
@@ -275,7 +275,7 @@ export default function renderGradient(altitude: number): [string, Vec3, Vec3] {
       ({ percent, rgb }) =>
         `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}) ${
           Math.round(percent * 100) / 100
-        }%`
+        }%`,
     )
     .join(", ");
   return [
